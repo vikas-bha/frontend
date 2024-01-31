@@ -1,8 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
+import { Navigate } from 'react-router-dom';
+
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
+
+
+    const dummyUser = {
+      email : "vbhardwaj347@gmail.com",
+      password: "12345678"
+    }
 
     useEffect(()=>{
         console.log("signup got called")
@@ -12,7 +21,18 @@ const Signup = () => {
       e.preventDefault();
       // call that signup/ login api here
       console.log(`Email: ${email}, Password: ${password}`);
+      if(dummyUser.email === email && dummyUser.password === password){
+          console.log("password and username is correct")
+          setLoggedIn(true);
+      }
+      else{
+        console.log("wrong");
+      }
     };
+
+    if(loggedIn){
+      return <Navigate to="/dashboard" />;
+    }
   
   
     return (
